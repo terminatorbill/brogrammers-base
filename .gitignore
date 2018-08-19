@@ -23,5 +23,5 @@
 hs_err_pid*
 
 # IntelliJ
-brogrammers-base.iml
+base.iml
 .idea/
