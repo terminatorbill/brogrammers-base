@@ -1,13 +1,19 @@
 package com.brogrammers;
 
-import com.brogrammers.domain.Brogrammer;
+import com.brogrammers.domain.BrogrammerFilter;
+import com.brogrammers.domain.BrogrammerRegistry;
+import com.brogrammers.domain.BrogrammerValidNameFilter;
 
 public class Application {
 
     public static void main(String[] args) {
 
-        Brogrammer
+        BrogrammerFilter brogrammerFilter = new BrogrammerValidNameFilter();
+
+        BrogrammerRegistry brogrammerRegistry = new BrogrammerRegistry(brogrammerFilter);
+
+        brogrammerRegistry
                 .getBrogrammers()
-                .forEach(brogrammer -> System.out.println("Hello " + brogrammer));
+                .forEach(brogrammer -> System.out.println("Hello " + brogrammer + "!"));
     }
 }
