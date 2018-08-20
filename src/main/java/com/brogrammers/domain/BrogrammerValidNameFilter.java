@@ -6,8 +6,8 @@ public class BrogrammerValidNameFilter implements BrogrammerFilter {
 
     private final Pattern pattern;
 
-    public BrogrammerValidNameFilter() {
-        pattern = Pattern.compile("[a-zA-Z]{3,25}");
+    public BrogrammerValidNameFilter(Pattern regexPattern) {
+        pattern = regexPattern;
     }
 
     @Override
