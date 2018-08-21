@@ -3,25 +3,31 @@ package com.brogrammers.domain;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
+@RunWith(Parameterized.class)
 public class BrogrammerValidNameFilterTest {
 
     private final BrogrammerFilter brogrammerFilter = new BrogrammerValidNameFilter(Pattern.compile("[a-zA-Z]{3,25}"));
+    private final String brogrammerName;
+    private final boolean isValid;
 
-    @DisplayName("Should allow brogrammer names which adhere to the provided Pattern")
-    @ParameterizedTest
-    @MethodSource("createBrogrammerNames")
-    void shouldKeep(String brogrammerName, boolean isValid) {
+    public BrogrammerValidNameFilterTest(String brogrammerName, boolean isValid) {
+        this.brogrammerName = brogrammerName;
+        this.isValid = isValid;
+    }
+
+    @Test
+    public void should_filter_brogrammers_adhering_to_pattern() {
 
         // given
-            Brogrammer brogrammer = new Brogrammer(brogrammerName);
+        Brogrammer brogrammer = new Brogrammer(brogrammerName);
 
         // when
         boolean shouldKeep = brogrammerFilter.shouldKeep(brogrammer);
@@ -30,13 +36,15 @@ public class BrogrammerValidNameFilterTest {
         assertThat(shouldKeep, is(isValid));
     }
 
-    private static Stream<Arguments> createBrogrammerNames() {
-        return Stream.of(
-                Arguments.of("SoumBill", true),
-                Arguments.of("ChriNikos", true),
-                Arguments.of("Someone123", false),
-                Arguments.of("aiaosdkaopidoaisoaidoaidoapsidopasidopasido", false),
-                Arguments.of("a", false)
-        );
+
+    @Parameterized.Parameters
+    public static Collection<Object[]> createBrogrammerNames() {
+        return Arrays.asList(new Object[][] {
+                {"SoumBill", true},
+                {"ChriNikos", true},
+                {"Someone123", false},
+                {"aiaosdkaopidoaisoaidoaidoapsidopasidopasido", false},
+                {"a", false}
+        });
     }
 }
