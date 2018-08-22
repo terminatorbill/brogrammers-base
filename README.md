@@ -39,5 +39,5 @@
 
 **Docker execution:**
 - <code>mvn clean package</code> in order for the jar to be generated
-- <code>docker build -t base .</code> in order to create an image called base from a Dockerfile residing in the current directory
+- <code>docker build -t base .</code> in order to create an image called base from a Dockerfile residing in the current directory. -t is the tag name aka the image name
 - <code>docker run base:latest</code> to create a container from that image and run the application.
