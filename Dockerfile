@@ -1,5 +1,5 @@
 FROM openjdk:8u181-jre-slim
-MAINTAINER Christidis Nikolas Bill Soumakis
+MAINTAINER Christidis Nikolaos Bill Soumakis
 
 WORKDIR /var/brogrammers-base
 
